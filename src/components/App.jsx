@@ -5,8 +5,8 @@ import { FormContainer } from './formContainer/formDiv.styled';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './List/ContactList';
 
-export const App = ({ handleDelete }) => {
-  const [contacts, setContacts] = useState([]);
+export const App = () => {
+  const [contacts, setContacts] = useState(() => parseLocalStorage() ?? []);
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = e => {
@@ -21,28 +21,34 @@ export const App = ({ handleDelete }) => {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    setContacts(prev => [newContact]);
+    setContacts(() => [newContact]);
+  };
+
+  function parseLocalStorage() {
+    try {
+      const recievedContacts = JSON.parse(localStorage.getItem('contacts'));
+      if (recievedContacts) {
+        return recievedContacts;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleDelete = e => {
+    setContacts(contacts =>
+      contacts.filter(contact => contact.id !== e.target.id)
+    );
   };
 
   const getFoundContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
+      contact.name.toLowerCase().includes(filter.toLowerCase(contact.name))
     );
   };
 
   useEffect(() => {
-    const recievedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (recievedContacts !== null) {
-      setContacts(recievedContacts);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (setContacts !== contacts) {
-      const itemToSet = JSON.stringify(contacts);
-      localStorage.setItem('contacts', itemToSet);
-    }
+    JSON.stringify(contacts);
   }, [contacts]);
 
   const visibleContacts = getFoundContacts();

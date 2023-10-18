@@ -1,16 +1,6 @@
 import { DeleteBtn, Item, Name } from './Contact.styled';
 
-export const Contact = ({ name, number, setContacts, id }) => {
-  const handleDelete = e => {
-    setContacts(prevState => {
-      return {
-        contacts: [...prevState.contacts].filter(
-          contact => contact.id !== e.target.id
-        ),
-      };
-    });
-  };
-
+export const Contact = ({ name, number, handleDelete, id }) => {
   return (
     <Item key={id}>
       <Name>

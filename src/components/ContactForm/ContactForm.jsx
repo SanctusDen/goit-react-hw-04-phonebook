@@ -17,19 +17,13 @@ export const ContactForm = ({ onSubmit }) => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    onSubmit({
-      id: nanoid(),
-    });
+    setOptions(prevContacts => [
+      ...prevContacts,
+      { name: options, number: options, id: nanoid() },
+    ]);
 
-    // this.setState({
-    //   name: '',
-    //   number: '',
-    // });
-    setOptions.reset();
-    // e.currentTarget.reset();
+    e.currentTarget.reset();
   };
-
-  // const onChange = handleChange();
 
   return (
     <Form onSubmit={handleSubmit}>
