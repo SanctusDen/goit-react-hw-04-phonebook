@@ -44,7 +44,6 @@ export const App = ({ handleDelete }) => {
     }
   }, []);
 
-  debugger;
   // const componentDidUpdate(_, prevState) {
   //   if (this.state.contacts !== prevState.contacts) {
 
