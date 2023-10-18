@@ -9,12 +9,6 @@ export const App = ({ handleDelete }) => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
 
-  // const [contactsFilter, setContactsFilter] = useState([], '');
-
-  // const handleFilterChange = e => {
-  //   setFilter({ filter: e.target.value });
-  // };
-
   const handleFilterChange = e => {
     setFilter({ filter: e.target.value });
   };
@@ -27,7 +21,7 @@ export const App = ({ handleDelete }) => {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    this.setState(prev => ({ contacts: [...prev.contacts, newContact] }));
+    setContacts(prev => [newContact]);
   };
 
   const getFoundContacts = () => {
@@ -44,17 +38,6 @@ export const App = ({ handleDelete }) => {
     }
   }, []);
 
-  // const componentDidUpdate(_, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-
-  //     try {
-  //       const itemToSet = JSON.stringify(contacts);
-  //       localStorage.setItem('contacts', itemToSet);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // }
   useEffect(() => {
     if (setContacts !== contacts) {
       const itemToSet = JSON.stringify(contacts);

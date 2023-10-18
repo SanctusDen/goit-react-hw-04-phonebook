@@ -5,19 +5,19 @@ import { Label, Field, SubmitBtn } from './ContactForm-module';
 import { nanoid } from 'nanoid';
 
 export const ContactForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
+
+  const [options, setOptions] = useState({ name: '', number: '' });
 
   const handleChange = e => {
-    setName({ [e.target.name]: e.target.value });
+    setOptions({ [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     onSubmit({
-      name: name,
-      number: number,
       id: nanoid(),
     });
 
@@ -25,7 +25,8 @@ export const ContactForm = ({ onSubmit }) => {
     //   name: '',
     //   number: '',
     // });
-    e.currentTarget.reset();
+    setOptions.reset();
+    // e.currentTarget.reset();
   };
 
   // const onChange = handleChange();
@@ -35,7 +36,7 @@ export const ContactForm = ({ onSubmit }) => {
       <Label htmlFor="name">Name</Label>
       <Field
         onChange={handleChange}
-        value={name}
+        value={options.name}
         type="text"
         name="name"
         pattern="^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -45,7 +46,7 @@ export const ContactForm = ({ onSubmit }) => {
       <Label htmlFor="number">Number</Label>
       <Field
         onChange={handleChange}
-        value={number}
+        value={options.number}
         type="tel"
         name="number"
         pattern="\\+?\\d{1,4}?[ .\\-\\s]?\\(?\\d{1,3}?\\)?[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,4}[ .\\-\\s]?\\d{1,9}"

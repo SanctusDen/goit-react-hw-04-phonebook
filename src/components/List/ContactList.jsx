@@ -1,4 +1,4 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 import { List } from './ContactList.styled';
 import { Contact } from 'components/Contact/Contact';
 
@@ -27,13 +27,13 @@ import { Contact } from 'components/Contact/Contact';
 export const ContactList = ({ visibleContacts, handleDelete, contacts }) => {
   return (
     <List>
-      {contacts.map(({ name, number, id }) => {
+      {contacts.map(({ options, id }) => {
         return (
           <Contact
             key={id}
             id={id}
-            name={name}
-            number={number}
+            name={options.name}
+            number={options.number}
             visibleContacts={visibleContacts}
             handleDelete={handleDelete}
           ></Contact>
