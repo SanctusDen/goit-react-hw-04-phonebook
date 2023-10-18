@@ -4,23 +4,22 @@ import { Form } from 'components/formContainer/formDiv.styled';
 import { Label, Field, SubmitBtn } from './ContactForm-module';
 import { nanoid } from 'nanoid';
 
-export const ContactForm = () => {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
+export const ContactForm = ({ onSubmit }) => {
   const [options, setOptions] = useState({ name: '', number: '' });
 
   const handleChange = e => {
-    setOptions({ [e.target.name]: e.target.value });
+    setOptions(prevState => [
+      ...prevState,
+      { [e.target.name]: e.target.value },
+    ]);
+
+    setOptions(prevState => [...prevState, { name: options, number: options }]);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    setOptions(prevState => [
-      ...prevState,
-      { name: options, number: options, id: nanoid() },
-    ]);
+    onSubmit({ ...options, id: nanoid() });
 
     e.currentTarget.reset();
   };
