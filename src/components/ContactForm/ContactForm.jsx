@@ -8,12 +8,10 @@ export const ContactForm = ({ onSubmit }) => {
   const [options, setOptions] = useState({ name: '', number: '' });
 
   const handleChange = e => {
-    setOptions(prevState => [
+    setOptions(prevState => ({
       ...prevState,
-      { [e.target.name]: e.target.value },
-    ]);
-
-    setOptions(prevState => [...prevState, { name: options, number: options }]);
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSubmit = e => {
@@ -21,7 +19,7 @@ export const ContactForm = ({ onSubmit }) => {
 
     onSubmit({ ...options, id: nanoid() });
 
-    e.currentTarget.reset();
+    setOptions({ name: '', number: '' });
   };
 
   return (
