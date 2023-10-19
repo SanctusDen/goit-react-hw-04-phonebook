@@ -4,13 +4,13 @@ import { Contact } from 'components/Contact/Contact';
 export const ContactList = ({ visibleContacts, handleDelete, contacts }) => {
   return (
     <List>
-      {contacts.map(({ options, id }) => {
+      {contacts.map(({ name, number, id }) => {
         return (
           <Contact
             key={id}
             id={id}
-            name={options.name}
-            number={options.number}
+            name={name}
+            number={number}
             visibleContacts={visibleContacts}
             handleDelete={handleDelete}
           ></Contact>

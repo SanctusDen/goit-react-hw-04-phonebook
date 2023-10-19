@@ -10,7 +10,7 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   const handleFilterChange = e => {
-    setFilter({ filter: e.target.value });
+    setFilter(e.target.value);
   };
 
   const onSubmit = newContact => {
@@ -21,7 +21,7 @@ export const App = () => {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    setContacts(() => [newContact]);
+    setContacts(prev => [...prev, newContact]);
   };
 
   function parseLocalStorage() {

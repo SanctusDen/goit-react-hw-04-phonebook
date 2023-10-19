@@ -1,10 +1,6 @@
 import { FilterField, FilterLabel } from './Filter.styled';
 
 export const Filter = ({ handleFilterChange, filter }) => {
-  // const handleFilterChange = e => {
-  //   setFilter({ filter: e.target.value });
-  // };
-
   return (
     <>
       <FilterLabel>Find contacts by name</FilterLabel>
